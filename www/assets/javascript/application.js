@@ -20,3 +20,29 @@ AngryDog = Backbone.Model.extend({});
 AngryDogs = Backbone.Collection.extend({
 	model : AngryDog
 });
+
+
+//Creating an ItemView that will display a single cat
+AngryDogView = Backbone.Marionette.ItemView.extend({
+//Which template we’re going to use (This is a mandatory requirement)
+template: '#angry_dog-template',
+//we can specify some (optional) properties to control the HTML that gets rendered
+tagName: 'tr',
+//className is simply an HTML class that gets added to the element Backbone creates, so our item will have “class=’angry_dog’”
+className: 'angry_dog'
+});
+
+//Creating CompositeView will be rendering a collection, we are telling it which ItemView to use to render each model within the collection
+AngryDogsView = Backbone.Marionette.CompositeView.exted({
+tagName: 'table',
+id: 'angry_dogs',
+className: 'table-stripped table-bordered',
+template: '#angry_dogs-template',
+itemView: AngryDogView,
+
+//we have to specify how HTML should be instered into our template with the appendHtml function
+appendHtml: function(collectionView, itemView){
+	//we just want it dumped within the “tbody”
+	collectionView.$("tbody").append(itemView.el);
+}
+});
