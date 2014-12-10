@@ -22,7 +22,7 @@ AngryDogs = Backbone.Collection.extend({
 });
 
 
-//Creating an ItemView that will display a single cat
+//Creating an ItemView that will display a single dog
 AngryDogView = Backbone.Marionette.ItemView.extend({
 //Which template we’re going to use (This is a mandatory requirement)
 template: '#angry_dog-template',
@@ -45,4 +45,23 @@ appendHtml: function(collectionView, itemView){
 	//we just want it dumped within the “tbody”
 	collectionView.$("tbody").append(itemView.el);
 }
+});
+
+//Right after we start our app, we’ll want to have our list of dogs displayed. For this purpose, we’ll add a simple initializer
+//This initializer will receive any options we send to our application when we call its “start” method (which we haven’t done yet). What our initializer does is straightforward: create a new view with our cats, and display it.
+MyApp.addInitializer(function(options){
+	var angryDogsView = new AngryDogView({
+		collection: options.dogs
+	});
+	MyApp.mainRegion.show(angryDogsView);
+});
+
+//Once the DOM is ready, we create a collection of dogs populated by dog models we create simultaneously. Then, we simply start our application by passing in the dogs collection, and voilà!
+$(document).ready(function(){
+	var dogs = new AngryDogs([
+		{name : 'Wet Dog'},
+		{name : 'Bitey Dog'},
+		{name : 'Surprised Dog'}
+	]);
+	MyApp.start({dogs: dogs});
 });
