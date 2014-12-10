@@ -40,6 +40,11 @@ className: 'table-stripped table-bordered',
 template: '#angry_dogs-template',
 itemView: AngryDogView,
 
+//CompositeView’s behavior has changed slightly. You now need to the view to rerender the portion displaying the collection when the latter is sorted.
+initialize: function(){
+    this.listenTo(this.collection, "sort", this.renderCollection);
+},
+
 //we have to specify how HTML should be instered into our template with the appendHtml function
 appendHtml: function(collectionView, itemView){
 	//we just want it dumped within the “tbody”
@@ -59,9 +64,13 @@ MyApp.addInitializer(function(options){
 //Once the DOM is ready, we create a collection of dogs populated by dog models we create simultaneously. Then, we simply start our application by passing in the dogs collection, and voilà!
 $(document).ready(function(){
 	var dogs = new AngryDogs([
-		{name : 'Wet Dog'},
-		{name : 'Bitey Dog'},
-		{name : 'Surprised Dog'}
+		//Adding images 
+		/*new AngryDog({name : 'Wet Dog'}),
+		new AngryDog({name : 'Bitey Dog'}),
+		new AngryDog({name : 'Surprised Dog'}),*/
+		new AngryDog({ name: 'Wet Dog', image_path: 'assets/images/cat2.jpg' }),
+      	new AngryDog({ name: 'Bitey Dog', image_path: 'assets/images/cat1.jpg' }),
+      	new AngryDog({ name: 'Surprised Dog', image_path: 'assets/images/cat3.jpg' })
 	]);
 	MyApp.start({dogs: dogs});
 });
