@@ -16,5 +16,25 @@
   <body>
     <div id="content">
     </div>
+    
+    <!--template for the entire collection, which will be a table-->
+    <!--This template will enable us to have a table with a single column containing the dog’s name-->
+    <script type="text/template" id="angry_dogs-template">
+        <thead>
+            <tr class='header'>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbodt>
+    </script>
+    
+    <!-- template used to create individual rows -->
+    <script type="text/template" id="angry_dogs-template">
+
+        //we’re simply going to print the “name” attribute of the model that is passed to the template
+        <td><%= name %></td>
+        
+    </script>
   </body>
 </html>
