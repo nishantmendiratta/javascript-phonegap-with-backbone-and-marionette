@@ -9,9 +9,12 @@
     <script src="assets/javascript/vendor/underscore.js"></script>
     <script src="assets/javascript/vendor/backbone.js"></script>
     <script src="assets/javascript/vendor/backbone.marionette.js"></script>
+    <script src="assets/javascript/application.js"></script>
 
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
+
+
   </head>
   <body>
     <div id="content">
@@ -26,15 +29,13 @@
             </tr>
         </thead>
         <tbody>
-        </tbodt>
+        </tbody>
     </script>
     
     <!-- template used to create individual rows -->
-    <script type="text/template" id="angry_dogs-template">
-
+    <script type="text/template" id="angry_dog-template">
         //we’re simply going to print the “name” attribute of the model that is passed to the template
         <td><%= name %></td>
-        
     </script>
   </body>
 </html>

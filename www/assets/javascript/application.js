@@ -18,7 +18,7 @@ AngryDog = Backbone.Model.extend({});
 
 //Creating a collection to store our Dogs
 AngryDogs = Backbone.Collection.extend({
-	model : AngryDog
+	model : AngryDog,
 });
 
 
@@ -33,17 +33,12 @@ className: 'angry_dog'
 });
 
 //Creating CompositeView will be rendering a collection, we are telling it which ItemView to use to render each model within the collection
-AngryDogsView = Backbone.Marionette.CompositeView.exted({
+AngryDogsView = Backbone.Marionette.CompositeView.extend({
 tagName: 'table',
 id: 'angry_dogs',
-className: 'table-stripped table-bordered',
+className: 'table table-bordered',
 template: '#angry_dogs-template',
 itemView: AngryDogView,
-
-//CompositeView’s behavior has changed slightly. You now need to the view to rerender the portion displaying the collection when the latter is sorted.
-initialize: function(){
-    this.listenTo(this.collection, "sort", this.renderCollection);
-},
 
 //we have to specify how HTML should be instered into our template with the appendHtml function
 appendHtml: function(collectionView, itemView){
@@ -55,7 +50,7 @@ appendHtml: function(collectionView, itemView){
 //Right after we start our app, we’ll want to have our list of dogs displayed. For this purpose, we’ll add a simple initializer
 //This initializer will receive any options we send to our application when we call its “start” method (which we haven’t done yet). What our initializer does is straightforward: create a new view with our cats, and display it.
 MyApp.addInitializer(function(options){
-	var angryDogsView = new AngryDogView({
+	var angryDogsView = new AngryDogsView({
 		collection: options.dogs
 	});
 	MyApp.mainRegion.show(angryDogsView);
@@ -65,12 +60,9 @@ MyApp.addInitializer(function(options){
 $(document).ready(function(){
 	var dogs = new AngryDogs([
 		//Adding images 
-		/*new AngryDog({name : 'Wet Dog'}),
-		new AngryDog({name : 'Bitey Dog'}),
-		new AngryDog({name : 'Surprised Dog'}),*/
-		new AngryDog({ name: 'Wet Dog', image_path: 'assets/images/cat2.jpg' }),
-      	new AngryDog({ name: 'Bitey Dog', image_path: 'assets/images/cat1.jpg' }),
-      	new AngryDog({ name: 'Surprised Dog', image_path: 'assets/images/cat3.jpg' })
+		{name : 'Wet Dog'},
+		{name : 'Bitey Dog'},
+		{name : 'Surprised Dog'}
 	]);
 	MyApp.start({dogs: dogs});
 });
